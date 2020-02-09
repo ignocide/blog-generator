@@ -36,6 +36,7 @@ exports.createPages = async ({ actions, graphql }) => {
               tags
             }
             excerpt(format: PLAIN)
+            html
           }
         }
       }
@@ -50,7 +51,7 @@ exports.createPages = async ({ actions, graphql }) => {
   const blogIndexPageTemplate = path.resolve(__dirname, './src/templates/IndexPageTemplate.tsx');
 
   const posts = data.allMarkdownRemark.edges;
-  const pagesByIndex = [[]];
+  const pagesByIndex = [ [] ];
   const pagesByTags = {};
   const pageSize = 10;
   //시간순, 시간이 같다면 이름순(desc)
@@ -64,9 +65,9 @@ exports.createPages = async ({ actions, graphql }) => {
 
   for (let post of posts) {
     const { node } = post;
-    const { rawMarkdownBody, fileAbsolutePath, frontmatter, excerpt } = node;
+    const { rawMarkdownBody, fileAbsolutePath, frontmatter, excerpt, html } = node;
     let { tags, title, date, group } = frontmatter;
-    const html = md.render(rawMarkdownBody);
+    // const html = md.render(rawMarkdownBody);
     tags = tags || [];
     let pageByIndex = pagesByIndex[pagesByIndex.length - 1];
     if (pageByIndex.length > pageSize) {
@@ -74,17 +75,14 @@ exports.createPages = async ({ actions, graphql }) => {
       pagesByIndex.push(pageByIndex);
     }
 
-    let buildDir = path.join(
-      'posts',
-      path.relative(paths.postsDir, fileAbsolutePath),
-    )
+    let buildDir = path.join('posts', path.relative(paths.postsDir, fileAbsolutePath));
     createPage({
       path: buildDir,
       context: {
         html: html,
         title: frontmatter.title,
         date: frontmatter.date,
-        tags
+        tags,
       },
       component: blogPostTemplate,
     });
@@ -116,7 +114,7 @@ exports.createPages = async ({ actions, graphql }) => {
   const tags = Object.keys(pagesByTags);
   for (let tag of tags) {
     const pageOfTag = pagesByTags[tag];
-    const path = `/tags/${tag}`
+    const path = `/tags/${tag}`;
     createPage({
       path: path,
       context: {
@@ -125,21 +123,21 @@ exports.createPages = async ({ actions, graphql }) => {
         currentTag: tag,
       },
       component: blogTagPageTemplate,
-    })
+    });
   }
 
   for (let index in pagesByIndex) {
     const pageOfIndex = pagesByIndex[index];
-    const path = `/page/${Number(index) + 1}`
+    const path = `/page/${Number(index) + 1}`;
     createPage({
       path: path,
       context: {
         list: pageOfIndex,
         tags,
         currentPage: index,
-        totalPageCount: pagesByIndex.length
+        totalPageCount: pagesByIndex.length,
       },
       component: blogIndexPageTemplate,
-    })
+    });
   }
 };
