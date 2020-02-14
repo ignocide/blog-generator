@@ -1,7 +1,7 @@
 ---
 tags: ["javascript"]
 title: '내 월급 내가 보겠다는데 이리 힘들 줄이야'
-date: 2018.04.12
+date: "2018.04.12"
 category: 'javascript'
 ---
 

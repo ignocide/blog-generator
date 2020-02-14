@@ -1,8 +1,7 @@
 ---
-tags: ["react","web","javascript","HOC"]
+tags: ["react","web","javascript"]
 title: 'React HOC(High Order Component)'
-date: 2018.01.15
-category: 'react'
+date: "2018.01.15"
 ---
 
 # HOC(High Order Component)
