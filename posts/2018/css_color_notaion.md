@@ -1,7 +1,7 @@
 ---
 tags: ['html', 'css']
 title: 'css의 색상 표기법(색상값)'
-date: '2018-08-30'
+date: '2018.08.30'
 category: 'css'
 ---
 
@@ -83,7 +83,7 @@ Hue, Saturation, Lightness는 각각 색상,채도,명도 뜻합니다.
 색상, 채도, 명도의 이름에서 알다 싶이 위 rgb에서의 색의 3원색과는 다른 관점으로 색의 3요소를 가지고 표현합니다.  
 즉, 색상과 짙은 정도(채도), 밝음 정도(명도)를 조합하여 색상을 표현합니다.
 
-![](/images/color-circle.png?style=centerme)
+![](./color-circle.png)
 
 Hue에 해당 하는 값은 한국말로는 색상환 이라고 불리는 `color circle`에서 색을 선택하는 식이기 때문에 css에서 angle를 표현하는 deg,grad,rad와 같은 변수들을 인자로 사용합니다.  
 Saturation와 Lightness는 백분율이 들어 갈 수 있습니다.
